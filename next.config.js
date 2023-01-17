@@ -13,10 +13,10 @@ const nextConfig = {
         },
         filename: 'static/chunks/remoteEntry.js',
         exposes: {
-          './useAuth': './components/auth',
-          './useUser': './components/user',
-          './authContext': './context/authContext',
-          './userContext': './context/userContext',
+          './useAuth': './components/auth.ts',
+          './useUser': './components/user.ts',
+          './authContext': './context/authContext.ts',
+          './userContext': './context/userContext.ts',
         },
         shared: {
           // whatever else
