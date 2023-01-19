@@ -1,6 +1,5 @@
 import { getCookie, setCookie } from "cookies-next";
-import { useCallback } from "react";
-import { IShareState, useShareState } from "../components/provider";
+import { IShareState, getShareState } from "../components/provider";
 
 const key = 'user-info'
 
@@ -30,7 +29,7 @@ export const UserState = (): IShareState => {
 }
 
 const useUserState = () => {
-    return useShareState(key)
+    return getShareState(key)
 
 }
 

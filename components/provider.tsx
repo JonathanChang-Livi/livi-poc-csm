@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from "react";
-import { AuthState as CreateAuthState } from "../hooks/auth";
-import { UserState as CreateUserState } from "../hooks/user";
+import { AuthState as createAuthState } from "../hooks/auth";
+import { UserState as createUserState } from "../hooks/user";
 
 export interface ProviderProps {
     children: React.ReactNode
@@ -18,8 +18,8 @@ export interface ShareState {
 
 const allContext: ShareState = {
     shareStates: [
-        CreateAuthState(),
-        CreateUserState()
+        createAuthState(),
+        createUserState()
     ]
 }
 
@@ -37,7 +37,7 @@ export const ShareStateProvider = ({ children }: ProviderProps) => {
     )
 }
 
-export const useShareState = (key?: string) => {
+export const getShareState = (key?: string) => {
     const states = useContext(ShareStateContext).shareStates
     if (!key) {
         return states

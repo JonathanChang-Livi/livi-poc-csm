@@ -1,7 +1,5 @@
 import { getCookie, setCookie } from "cookies-next";
-import { NextRequest } from "next/server";
-import { useCallback } from "react";
-import { IShareState, useShareState } from "../components/provider";
+import { IShareState, getShareState } from "../components/provider";
 
 // export const AuthState: ShareStateProps = {
 //     token: '',
@@ -31,7 +29,7 @@ export const AuthState = (): IShareState => {
 }
 
 const useAuthState = () => {
-    return useShareState(key)
+    return getShareState(key)
 
 }
 
