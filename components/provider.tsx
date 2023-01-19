@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext } from "react";
 import { AuthState as createAuthState } from "../hooks/auth";
 import { UserState as createUserState } from "../hooks/user";
 
@@ -27,7 +27,7 @@ const DEFAULT_STATE: ShareState = {
     shareStates: []
 }
 
-const ShareStateContext = createContext(DEFAULT_STATE)
+export const ShareStateContext = createContext(DEFAULT_STATE)
 
 export const ShareStateProvider = ({ children }: ProviderProps) => {
     return (
@@ -35,20 +35,6 @@ export const ShareStateProvider = ({ children }: ProviderProps) => {
             {children}
         </ShareStateContext.Provider>
     )
-}
-
-export const getShareState = (key?: string) => {
-    const states = useContext(ShareStateContext).shareStates
-    if (!key) {
-        return states
-    }
-
-    const find = states.find(x => x && x.key === key)
-    if (!find) {
-        return undefined
-    }
-
-    return find
 }
 
 export default ShareStateProvider

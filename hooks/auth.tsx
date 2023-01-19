@@ -1,5 +1,6 @@
 import { getCookie, setCookie } from "cookies-next";
-import { IShareState, getShareState } from "../components/provider";
+import { useContext } from "react";
+import { IShareState, ShareStateContext } from "../components/provider";
 
 // export const AuthState: ShareStateProps = {
 //     token: '',
@@ -29,7 +30,14 @@ export const AuthState = (): IShareState => {
 }
 
 const useAuthState = () => {
-    return getShareState(key)
+    const states = useContext(ShareStateContext).shareStates
+
+    const find = states.find(x => x.key === key)
+    if (!find) {
+        return undefined
+    }
+
+    return find
 
 }
 
