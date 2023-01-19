@@ -1,5 +1,5 @@
 import { getCookie, setCookie } from "cookies-next";
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { IShareState, ShareStateContext } from "../components/provider";
 
 // export const AuthState: ShareStateProps = {
@@ -18,9 +18,9 @@ export const AuthState = (): IShareState => {
 
     // const [auth, updateAuth] = useState<string | undefined>(token)
 
-    const update = (token: string): void => {
+    const update = useCallback((token: string): void => {
         setCookie(key, token)
-    }
+    }, [])
 
     return {
         key,
