@@ -41,14 +41,14 @@ interface UserInfo {
 // }
 
 const useUserState = create<IShareState<UserInfo>>((set) => {
-    const cookie = getCookie(key)
+    // const cookie = getCookie(key)
     let current: UserInfo = {
         username: '',
         accBalance: ''
     }
-    if (cookie) {
-        current = JSON.parse(cookie.toString())
-    }
+    // if (cookie) {
+    //     current = JSON.parse(cookie.toString())
+    // }
     return {
         current,
         update: (value) => {
