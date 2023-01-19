@@ -42,14 +42,14 @@ const key = 'auth-token'
 // }
 
 
-const useAuthState = create<IShareState<string>>((set) => {
-    const cookie = getCookie(key)
-    let current = undefined
-    if (cookie) {
-        current = JSON.parse(cookie.toString())
-    }
+const useAuthState = create<IShareState<string | undefined>>((set) => {
+    // const cookie = getCookie(key)
+    // let current = undefined
+    // if (cookie) {
+    //     current = JSON.parse(cookie.toString())
+    // }
     return {
-        current,
+        current: undefined,
         update: (value) => {
             setCookie(key, value)
             set({ current: value })
