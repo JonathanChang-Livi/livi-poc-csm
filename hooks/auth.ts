@@ -51,8 +51,8 @@ const useAuthState = create<IShareState<string | undefined>>((set) => {
     return {
         current: undefined,
         update: (value) => {
-            setCookie(key, value)
-            set({ current: value })
+            // setCookie(key, value)
+            set(() => ({ current: value }))
         }
     }
 })

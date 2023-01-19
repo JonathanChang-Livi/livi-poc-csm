@@ -52,8 +52,8 @@ const useUserState = create<IShareState<UserInfo>>((set) => {
     return {
         current,
         update: (value) => {
-            setCookie(key, value)
-            set({ current: value })
+            // setCookie(key, value)
+            set(() => ({ current: value }))
         }
     }
 })
