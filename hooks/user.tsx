@@ -1,6 +1,6 @@
 import { getCookie, setCookie } from "cookies-next";
-import { useCallback, useContext } from "react";
-import { IShareState, ShareStateContext } from "../components/provider";
+import { create } from "zustand";
+import { IShareState } from "../components/interface";
 
 const key = 'user-info'
 
@@ -9,35 +9,53 @@ interface UserInfo {
     accBalance: string
 }
 
-export const UserState = (): IShareState => {
+// export const UserState = (): IShareState => {
+//     const cookie = getCookie(key)
+//     let user: UserInfo | undefined = undefined
+//     if (cookie) {
+//         user = JSON.parse(cookie.toString())
+//     }
+
+//     // const [auth, updateAuth] = useState<string | undefined>(token)
+
+//     const update = useCallback((user: UserInfo): void => {
+//         setCookie(key, user)
+//     }, [])
+
+//     return {
+//         key,
+//         value: user,
+//         update
+//     }
+// }
+
+// const useUserState = () => {
+//     const states = useContext(ShareStateContext).shareStates
+
+//     const find = states.find(x => x.key === key)
+//     if (!find) {
+//         return undefined
+//     }
+
+//     return find
+// }
+
+const useUserState = create<IShareState<UserInfo>>((set) => {
     const cookie = getCookie(key)
-    let user: UserInfo | undefined = undefined
+    let current: UserInfo = {
+        username: '',
+        accBalance: ''
+    }
     if (cookie) {
-        user = JSON.parse(cookie.toString())
+        current = JSON.parse(cookie.toString())
     }
-
-    // const [auth, updateAuth] = useState<string | undefined>(token)
-
-    const update = useCallback((user: UserInfo): void => {
-        setCookie(key, user)
-    }, [])
-
     return {
-        key,
-        value: user,
-        update
+        current,
+        update: (value) => {
+            setCookie(key, value)
+            set({ current: value })
+        }
     }
-}
-
-const useUserState = () => {
-    const states = useContext(ShareStateContext).shareStates
-
-    const find = states.find(x => x.key === key)
-    if (!find) {
-        return undefined
-    }
-
-    return find
-}
+})
 
 export default useUserState
