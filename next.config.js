@@ -13,9 +13,9 @@ const nextConfig = {
         },
         filename: 'static/chunks/remoteEntry.js',
         exposes: {
-          './useShareState': './components/provider',
-          './useAuth': './hooks/auth',
-          './useUser': './hooks/user',
+          './provider': './components/provider',
+          './hooks/useAuthState': './hooks/auth',
+          './hooks/useUserState': './hooks/user',
         },
         shared: {
           // whatever else

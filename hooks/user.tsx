@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import { getCookie, setCookie } from "cookies-next";
 import { useCallback } from "react";
 import { IShareState, useShareState } from "../components/provider";
 
@@ -9,17 +9,17 @@ interface UserInfo {
     accBalance: string
 }
 
-export const UserState = (req: NextRequest): IShareState => {
-    const cookie = req.cookies.get(key)
+export const UserState = (): IShareState => {
+    const cookie = getCookie(key)
     let user: UserInfo | undefined = undefined
     if (cookie) {
-        user = JSON.parse(cookie.value)
+        user = JSON.parse(cookie.toString())
     }
 
     // const [auth, updateAuth] = useState<string | undefined>(token)
 
     const update = useCallback((user: UserInfo): void => {
-        req.cookies.set(key, JSON.stringify(user))
+        setCookie(key, user)
     }, [])
 
     return {
@@ -29,7 +29,9 @@ export const UserState = (req: NextRequest): IShareState => {
     }
 }
 
-export const useAuthState = () => {
+const useUserState = () => {
     return useShareState(key)
 
 }
+
+export default useUserState

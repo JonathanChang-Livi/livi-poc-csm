@@ -1,11 +1,9 @@
-import { NextRequest } from "next/server";
 import React, { createContext, useContext } from "react";
-import { AuthState } from "../hooks/auth";
-import { UserState } from "../hooks/user";
+import { AuthState as CreateAuthState } from "../hooks/auth";
+import { UserState as CreateUserState } from "../hooks/user";
 
 export interface ProviderProps {
     children: React.ReactNode
-    request: NextRequest
 }
 
 export interface IShareState {
@@ -18,13 +16,11 @@ export interface ShareState {
     shareStates: IShareState[]
 }
 
-const AllContext = (req: NextRequest): ShareState => {
-    return {
-        shareStates: [
-            AuthState(req),
-            UserState(req)
-        ]
-    }
+const allContext: ShareState = {
+    shareStates: [
+        CreateAuthState(),
+        CreateUserState()
+    ]
 }
 
 const DEFAULT_STATE: ShareState = {
@@ -33,9 +29,9 @@ const DEFAULT_STATE: ShareState = {
 
 const ShareStateContext = createContext(DEFAULT_STATE)
 
-export const ShareStateProvider = ({ children, request }: ProviderProps) => {
+export const ShareStateProvider = ({ children }: ProviderProps) => {
     return (
-        <ShareStateContext.Provider value={AllContext(request)}>
+        <ShareStateContext.Provider value={allContext}>
             {children}
         </ShareStateContext.Provider>
     )
@@ -47,10 +43,12 @@ export const useShareState = (key?: string) => {
         return states
     }
 
-    const find = states.find(x => x.key === key)
-    if(!find){
+    const find = states.find(x => x && x.key === key)
+    if (!find) {
         return undefined
     }
 
     return find
 }
+
+export default ShareStateProvider

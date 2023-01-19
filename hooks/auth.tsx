@@ -1,3 +1,4 @@
+import { getCookie, setCookie } from "cookies-next";
 import { NextRequest } from "next/server";
 import { useCallback } from "react";
 import { IShareState, useShareState } from "../components/provider";
@@ -9,17 +10,17 @@ import { IShareState, useShareState } from "../components/provider";
 
 const key = 'auth-token'
 
-export const AuthState = (req: NextRequest): IShareState => {
-    const cookie = req.cookies.get(key)
+export const AuthState = (): IShareState => {
+    const cookie = getCookie(key)
     let token = undefined
     if (cookie) {
-        token = cookie.value
+        token = cookie.toString()
     }
 
     // const [auth, updateAuth] = useState<string | undefined>(token)
 
     const update = useCallback((token: string): void => {
-        req.cookies.set(key, token)
+        setCookie(key, token)
     }, [])
 
     return {
@@ -29,7 +30,9 @@ export const AuthState = (req: NextRequest): IShareState => {
     }
 }
 
-export const useAuthState = () => {
+const useAuthState = () => {
     return useShareState(key)
 
 }
+
+export default useAuthState
