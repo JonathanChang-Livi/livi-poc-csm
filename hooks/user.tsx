@@ -9,7 +9,7 @@ interface UserInfo {
     accBalance: string
 }
 
-export const AuthState = (req: NextRequest): IShareState => {
+export const UserState = (req: NextRequest): IShareState => {
     const cookie = req.cookies.get(key)
     let user: UserInfo | undefined = undefined
     if (cookie) {
