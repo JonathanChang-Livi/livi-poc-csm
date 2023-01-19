@@ -19,9 +19,9 @@ export const AuthState = (): IShareState => {
 
     // const [auth, updateAuth] = useState<string | undefined>(token)
 
-    const update = useCallback((token: string): void => {
+    const update = (token: string): void => {
         setCookie(key, token)
-    }, [])
+    }
 
     return {
         key,
