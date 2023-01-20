@@ -1,5 +1,6 @@
 import { getCookie, setCookie } from "cookies-next";
 import { create } from "zustand";
+import { devtools, persist } from "zustand/middleware"
 import { IShareState } from "../components/interface";
 
 // export const AuthState: ShareStateProps = {
@@ -42,19 +43,9 @@ const key = 'auth-token'
 // }
 
 
-const useAuthState = create<IShareState<string | undefined>>((set) => {
-    // const cookie = getCookie(key)
-    // let current = undefined
-    // if (cookie) {
-    //     current = JSON.parse(cookie.toString())
-    // }
-    return {
-        current: undefined,
-        update: (value) => {
-            // setCookie(key, value)
-            set(() => ({ current: value }))
-        }
-    }
-})
+const useAuthState = create<IShareState<string | undefined>>()((set) => ({
+    current: undefined,
+    update: (value) => set(() => ({ current: value }))
+}))
 
 export default useAuthState
