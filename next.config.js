@@ -14,8 +14,7 @@ const nextConfig = {
         },
         filename: 'static/chunks/remoteEntry.js',
         exposes: {
-          './getAuth': './hooks/auth/current',
-          './setAuth': './hooks/auth/update',
+          './useAuthState': './hooks/useAuthState',
           // './useUser': './hooks/user',
         },
         shared: {
