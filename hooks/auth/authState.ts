@@ -1,5 +1,5 @@
-import { useAuthState } from "./useAuthState";
+import { getCookie } from "cookies-next";
 
-const [ authState, setAuthState ] = useAuthState
+const authState = getCookie('auth-token')
 
 export default authState
