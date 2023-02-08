@@ -10,7 +10,7 @@ const nextConfig = {
       new NextFederationPlugin({
         name: 'csm',
         remotes: {
-          'csm': `csm@https://livi-poc-csm.vercel.app/_next/static/${isServer ? 'server' : 'chunks'}/remoteEntry.js`
+          // 'csm': `csm@https://livi-poc-csm.vercel.app/_next/static/${isServer ? 'server' : 'chunks'}/remoteEntry.js`
         },
         filename: 'static/chunks/remoteEntry.js',
         exposes: {
