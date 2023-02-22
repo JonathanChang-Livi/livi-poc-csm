@@ -19,6 +19,7 @@ const nextConfig = {
           // './useUser': './hooks/user',
         },
         shared: {
+          './useAuthState': './hooks/auth/authState',
           // whatever else
         },
       })

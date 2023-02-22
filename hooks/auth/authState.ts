@@ -1,5 +1,15 @@
-import { getCookie } from "cookies-next";
+import { create } from "zustand"
+import { IShareState } from "../../components/interface"
 
-const authState = getCookie('auth-token')
+interface AuthState {
+    token: string | undefined
+}
 
-export default authState
+const useAuthState = create<IShareState<AuthState>>((set) => ({
+    current: {
+        token: undefined
+    },
+    update: (value) => set({ current: value })
+}))
+
+export default useAuthState
